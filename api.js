@@ -9,17 +9,14 @@ export async function fetchCharacterData(characterName) {
 
         const response = await fetch(url);
 
-        // Kontrollera om anropet lyckades
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
         const data = await response.json();
 
-        // Logga datan för felsökning
         console.log('Fetched data:', data);
 
-        // Om ett namn har angetts, filtrera karaktärerna
         if (characterName) {
             console.log('Filtering characters...');
 
@@ -27,21 +24,21 @@ export async function fetchCharacterData(characterName) {
 
             console.log('Lowercased name:', lowercasedName);
 
-            // Filtrera karaktärerna där namnet innehåller den del av namnet vi söker
+            // Filter characters if the input is part of a name, and loweCase
             const filteredData = data.filter(character => 
                 character.name && character.name.toLowerCase().includes(lowercasedName)
             );
 
-            console.log('Filtered characters:', filteredData); // Logga de filtrerade karaktärerna
+            console.log('Filtered characters:', filteredData);
 
             return filteredData;
         }
 
         console.log('No character name specified, returning all characters...');
 
-        return data; // Om inget namn har angetts, returnera alla karaktärer
+        return data; // If no name is written, return all characters
     } catch (error) {
         console.error("Error fetching data:", error);
-        return null; // Om något går fel, returnera null
+        return null; // If anything is wrong, return null
     }
 }
