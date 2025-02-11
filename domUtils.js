@@ -13,7 +13,7 @@ export function displayCharacterInfo(characters) {
         return;
     }
     // Emptying the result-div
-    resultDiv.innerHTML = '';
+    document.getElementById("result").textContent = "";
 
     // Looping through all characters and creating a section
     for (const character of characters) {
